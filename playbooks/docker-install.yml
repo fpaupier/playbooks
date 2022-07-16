@@ -54,6 +54,13 @@
         name: "{{ default_container_image }}"
         source: pull
 
+    - name: Install docker-compose from official github repo
+      remote_user: ansible_ubuntu_demo
+      get_url:
+        url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: 'u+x,g+x'
+
     - name: Create default containers
       community.docker.docker_container:
         name: "{{ default_container_name }}{{ item }}"
